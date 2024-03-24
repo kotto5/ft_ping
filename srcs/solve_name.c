@@ -6,14 +6,16 @@ typedef struct s_maybeInt {
     unsigned        ip;
 }   t_maybeInt;
 
-static t_maybeInt solve_with_file(char *file) {
+static t_maybeInt solve_with_file(char *host, char *file) {
     // TODO
+    (void)host;
+    (void)file;
     return (t_maybeInt){false, 0};
 }
 
 // [Char] -> int
 t_maybeInt    solve_name(char *host_name) {
-    t_maybeInt result = solve_with_file("/etc/hosts");
+    t_maybeInt result = solve_with_file(host_name, "/etc/hosts");
     // TODO : solve with DNS? It maybe forbidden?
     return result;
 }
