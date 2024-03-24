@@ -9,6 +9,8 @@
 #include "get_next_line_bonus.h"
 #include <arpa/inet.h>
 #include <assert.h>
+#include <netdb.h>
+#include <netinet/in.h>
 
 typedef struct s_maybeInt {
     bool            ok;
@@ -46,9 +48,29 @@ static t_maybeInt solve_with_file(char *host, char *file) {
     return MAY(false, 0);
 }
 
+static t_maybeInt solve_dns(char *host) {
+    struct hostent *he = gethostbyname(host);
+    if (he == NULL) {
+        return MAY(false, 0);
+    }
+    struct in_addr **addr_list = (struct in_addr **)he->h_addr_list;
+    if (addr_list[0] == NULL) {
+        return MAY(false, 0);
+    }
+    uint32_t ip = ntohl(addr_list[0]->s_addr);
+    return MAY(true, ip);
+}
+
+
 // [Char] -> int
 t_maybeInt    solve_name(char *host_name) {
-    t_maybeInt result = solve_with_file(host_name, "/etc/hosts");
+    t_maybeInt result;
+    
+    result = solve_with_file(host_name, "/etc/hosts");
+    if (result.ok == true)
+        return result;
+    
+    result = solve_dns(host_name);
     // TODO : solve with DNS? It maybe forbidden?
     return result;
 }
@@ -79,18 +101,28 @@ int test_solve_with_file() {
     return 0;
 }
 
+int test_solve_dns() {
+    char *host = "www.google.com";
+    t_maybeInt solve = solve_dns(host);
+    assert(solve.ok == true);
+    assert(solve.ip == 0x8efb2a84);
+    return 0;
+}
+
 int main(int argc, char *argv[]) {
     test_solve_with_file();
+    test_solve_dns();
 
     if (argc != 2) {
         fprintf(stderr, "Usage: %s <hostname>\n", argv[0]);
-        return -1;
+        return 1;
     }
 
     t_maybeInt solve = solve_name(argv[1]);
-    if (solve.ok == false)
-        return -1;
+    if (solve.ok)
+        printf("%x\n", solve.ip);
     else
-        printf("%d\n", solve.ip);
+        printf("Not found\n");
+    printf("Finished\n");
     return 0;
 }
