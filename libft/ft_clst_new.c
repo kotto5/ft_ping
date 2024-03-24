@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_clst_new.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kakiba <kotto555555@gmail.com>             +#+  +:+       +#+        */
+/*   By: kakiba <kakiba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 21:25:04 by kakiba            #+#    #+#             */
-/*   Updated: 2022/12/09 21:28:30 by kakiba           ###   ########.fr       */
+/*   Updated: 2024/03/24 21:52:07 by kakiba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_clist	*ft_clstnew(void *content)
-{
-	return (ft_lstnew(content));
+t_clist	*ft_clstnew(void *content) {
+	(void)content;
+	return (NULL);
 }

@@ -7,7 +7,7 @@ HEADER_DIR = includes
 HEADERS	=	$(wildcard $(HEADER_DIR)/*.h)
 SRCDIR	=	srcs
 OBJDIR	=	objs
-INCLUDES = -I$(HEADER_DIR) -I./libft/includes
+INCLUDES = -I$(HEADER_DIR) -Ilibft/includes
 
 SRCS	=	$(wildcard $(SRCDIR)/*.c)
 OBJS	=	$(addprefix $(OBJDIR)/, $(notdir $(SRCS:.c=.o)))
