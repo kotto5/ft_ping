@@ -1,4 +1,4 @@
 ping
 objs
 *.o
-libft.a
+*.a

@@ -6,14 +6,14 @@
 /*   By: kakiba <kakiba@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 20:25:36 by kakiba            #+#    #+#             */
-/*   Updated: 2024/03/24 21:52:43 by kakiba           ###   ########.fr       */
+/*   Updated: 2024/03/24 22:13:30 by kakiba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 // if remain has nothing, strchr() overflow so it must have length.
 // Name is easily confused original strchr...
-char	*ft_strchr__(const char *s, int c, size_t length)
+char	*ft_strchr_(const char *s, int c, size_t length)
 {
 	size_t	i;
 
