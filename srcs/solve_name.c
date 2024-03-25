@@ -42,11 +42,12 @@ t_maybeInt    solve_name(char *host_name) {
 }
 
 int test_solve_dns() {
-    char *host = "www.google.com";
+    // www.google.com を引数にしたいが、取れるaddressが頻繁に変わるのでlocalhostで代用
+    char *host = "localhost";
     t_maybeInt solve = solve_dns(host);
     assert(solve.ok == true);
-    printf("solve.ip: %x inet_addr(): %x\n", solve.ip, 0x8efb2ac4);
-    assert(solve.ip == 0x8efb2ac4);
+    printf("solve.ip: %x inet_addr(): %x\n", solve.ip, 0x7f000001);
+    assert(solve.ip == 0x7f000001);
     return 0;
 }
 
